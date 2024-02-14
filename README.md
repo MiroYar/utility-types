@@ -1,2 +1,2 @@
-# UtilityTypes
+# utility-types
  
