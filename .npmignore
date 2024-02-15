@@ -1,0 +1,8 @@
+test.ts
+
+.DS_Store
+
+.gitattributes
+.gitignore
+
+package-lock.json
