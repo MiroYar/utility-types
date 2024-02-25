@@ -1,0 +1,4 @@
+v.0.1.0
+- Forked typescript-tuple, typescript-compare and typescript-logic;
+- URL generics are combined under a single namespace;
+- Added generic Override.

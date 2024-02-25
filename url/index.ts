@@ -1,12 +1,23 @@
-export type TWSProtocol = 'ws' | 'wss';
-export type THTTPProtocol = 'http' | 'https';
-export type TProtocol = TWSProtocol | THTTPProtocol;
+type IPPure = `${number}.${number}.${number}.${number}`;
+export enum AdditionalFirstLevelDomain {}
+type FirstLevelDomain = keyof typeof AdditionalFirstLevelDomain | 'ru' | 'com';
 
-type TIP = `${number}.${number}.${number}.${number}`;
-export type TIPWithPort<P extends number = number> = `${TIP}:${P}`;
+export declare namespace Url {
+  type Protocol = {
+    WS: 'ws' | 'wss';
+    HTTP: 'http' | 'https';
+    All: Protocol[Exclude<keyof Protocol, 'All'>];
+  };
 
-enum EAdditionalFirstLevelDomain {}
-type TFirstLevelDomain = keyof typeof EAdditionalFirstLevelDomain | 'ru' | 'com';
-export type TDNS<S extends string = string, T extends string | '' = string, F extends string = TFirstLevelDomain> = `${
-  | (T extends string ? `${T}.` : '')
-  | ''}${S}.${F}`;
+  export type IP<P extends number> = `${IPPure}:${P}`;
+
+  export type DNS<S extends string = string, T extends string | '' = string, F extends string = FirstLevelDomain> = `${
+    | (T extends string ? `${T}.` : '')
+    | ''}${S}.${F}`;
+
+  export type Address<
+    Prot extends keyof Protocol,
+    Host extends IP<number> | DNS,
+    Path extends string = '/'
+  > = `${Protocol[Prot]}://${Host}${Path}`;
+}
